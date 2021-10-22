@@ -173,3 +173,18 @@ To start the container based on the image we just built, run:
 ```
 
 </p></details>
+
+<details>
+<summary><b>Private Container Registry</b></summary><p>
+
+1. Create private Docker repository on AWS - in the AWS console search for ECR (Elastic Container Registry), and click _Get Started_ . Under _Create Repository_ for the repo name, enter a name that is the same as your image. Click _Create Repository_. Each image should have it's own repo.
+
+2. Push our image that we have created locally to ECR - inside the ECR dashboard, select the image, and click on _View Push Commands._ You always have to login to the private repo using
+
+```
+  docker login
+```
+
+AWS provides the docker login command, just copy and paste into your terminal. In order for this to work you need to have the AWS cli installed and credentials configured.
+
+</p></details>
