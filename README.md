@@ -105,3 +105,71 @@ To stop the containers run:
 ```
 
 </p></details>
+
+<details>
+<summary><b>Dockerfile</b></summary><p>
+
+**A Dockerfile is a blueprint for building images.**
+
+## ANATOMY OF A DOCKERFILE
+
+_FROM_ start by basing it on another image
+
+Ours is a JavaScript app with Node backend so we will use Node inside our container.
+
+```
+ FROM node
+```
+
+We can configure environmental variables. This step is optional. It is better to define environmental variables in the docker-compose file though: they are easier to manage that way
+
+```
+  ENV MONGO_DB_USERNAME=admin
+      MONGO_DBPWD=password
+```
+
+Can execute any Linux command. The following command creates a /home/app folder INSIDE the container.
+
+```
+  RUN mkdir -p /home/app
+```
+
+Copy current folder files to /home/app. The . refers to the current folder.
+
+```
+  COPY . /home/app
+```
+
+Start the app with the following command:
+
+```
+  CMD ["node" "server.js"]
+```
+
+**What is the difference between RUN and CMD?**
+
+CMD is an entrypoint command and you can only have one CMD command per Dockerfile.
+
+You can have multiple RUN commands.
+
+To build an image using a Dockerfile, you have to give the image name and tag using "-t". You must also provide the location of the Dockerfile. In this case we're in the the same folder as the Dockerfile so the location is defined by a .
+
+```
+  docker build -t my-app:1.0 .
+```
+
+To make sure the image has been created run
+
+```
+  docker images
+```
+
+Whenever you change the Dockerfile, you have to rebuild the image.
+
+To start the container based on the image we just built, run:
+
+```
+  docker run my-app:1.0
+```
+
+</p></details>
