@@ -61,6 +61,47 @@ Download and install Docker. I am on a Windows machine running Windows home. I u
 </p></details>
 
 <details>
-<summary><b>Debugging Containers</b></summary><p>
+<summary><b>Create Network and Setup MongoDB</b></summary><p>
+
+# commands
+
+## create docker network
+
+```
+  docker network create mongo-network
+```
+
+## start mongodb
+
+```
+  docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --net mongo-network mongo
+```
+
+## start mongo-express
+
+```
+  docker run -d -p 8081:8081 -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=password --net mongo-network --name mongo-express mongo-express
+```
+
+</p></details>
+
+<details>
+<summary><b>Docker Compose</b></summary><p>
+
+# Start containers using docker compose
+
+Create docker compose file. (see mongo-docker-compose.yaml)
+
+Run the following command to start all the containers defined in the docker compose file:
+
+```
+  docker-compose -f mongo-docker-compose.yaml up
+```
+
+To stop the containers run:
+
+```
+  docker-compose -f mongo-docker-compose.yaml down
+```
 
 </p></details>
